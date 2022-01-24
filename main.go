@@ -28,7 +28,10 @@ func main() {
 
 	for i := 1; i <= 10000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
-		testDal.Add(&fakeData)
+		err := testDal.Add(&fakeData)
+		if err != nil {
+			return
+		}
 		time.Sleep(1 * time.Second)
 	}
 }
