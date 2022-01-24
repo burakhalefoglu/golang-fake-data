@@ -1,7 +1,7 @@
 package createFakePerson
 
 import (
-	"golang-fake-data/fake-data/fakePersonStruct"
+	"golang-fake-data/fakePersonStruct"
 
 	faker "github.com/jaswdr/faker"
 )

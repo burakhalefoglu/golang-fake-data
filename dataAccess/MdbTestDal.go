@@ -2,8 +2,9 @@ package dataaccess
 
 import (
 	"context"
-	"golang-fake-data/fake-data/fakePersonStruct"
+	"golang-fake-data/fakePersonStruct"
 	"time"
+
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -24,6 +25,3 @@ func (m *MDTestDal) Add(data *fakePersonStruct.Person) error {
 	}
 	return nil
 }
-
-
-

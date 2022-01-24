@@ -1,10 +1,10 @@
 package main
 
 import (
-	"golang-fake-data/fake-data/createFakePerson"
-	"golang-fake-data/fake-data/dataaccess"
-	"golang-fake-data/fake-data/database/mongodb"
-	"golang-fake-data/fake-data/helper"
+	"golang-fake-data/createFakePerson"
+	"golang-fake-data/dataaccess"
+	"golang-fake-data/database/mongodb"
+	"golang-fake-data/helper"
 	"log"
 	"runtime"
 	"time"
@@ -22,7 +22,9 @@ func main() {
 		return
 	}
 	var client = mongodb.ConnectMongodb()
-	testDal := dataaccess.MDTestDal{client}
+	testDal := dataaccess.MDTestDal{
+		Client: client,
+	}
 
 	for i := 1; i <= 10000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()

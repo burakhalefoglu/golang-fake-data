@@ -1,4 +1,4 @@
-module golang-fake-data/fake-data
+module golang-fake-data
 
 go 1.17
 
