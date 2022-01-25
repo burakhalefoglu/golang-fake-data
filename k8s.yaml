@@ -2,9 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: fake-person-worker
-  namespace: development
+  namespace: worker-app-dev
 spec:
-  parallelism: 1000
+  parallelism: 100
   template:
     metadata:
       labels:
@@ -23,17 +23,20 @@ spec:
               cpu: "0.1"
             limits:
               memory: "250M"
-              cpu: "0.25"
+              cpu: "0.2"
           env:
             - name: MONGODB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: app-config
+                  name: worker-app-config
                   key: mongo-host
             - name: MONGODB_USER
-              value: root
+              valueFrom:
+                configMapKeyRef:
+                  name: worker-app-config
+                  key: mongodb-ml-test-db-user
             - name: MONGODB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: app-secret
-                  key: mongodb-root-password
+                  name: worker-app-secret
+                  key: mongodb-ml-test-db-pass
