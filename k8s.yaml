@@ -19,10 +19,10 @@
 #           imagePullPolicy: Always
 #           resources:
 #             requests:
-#               memory: "100M"
+#               memory: "250M"
 #               cpu: "0.1"
 #             limits:
-#               memory: "250M"
+#               memory: "500M"
 #               cpu: "0.2"
 #           env:
 #             - name: MONGODB_HOST
@@ -69,11 +69,11 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              memory: "50M"
-              cpu: "0.01"
+              memory: "250M"
+              cpu: "0.05"
             limits:
-              memory: "100M"
-              cpu: "0.02"
+              memory: "500M"
+              cpu: "0.1"
           env:
             - name: MONGODB_HOST
               valueFrom:
