@@ -8,7 +8,7 @@ import (
 	"log"
 	"runtime"
 	"time"
-
+	"log"
 	"github.com/joho/godotenv"
 )
 
@@ -30,6 +30,7 @@ func main() {
 		var fakeData = createFakePerson.CreatePerson()
 		err := testDal.Add(&fakeData)
 		if err != nil {
+			log.Fatal(err)
 			return
 		}
 		time.Sleep(100 * time.Millisecond)
