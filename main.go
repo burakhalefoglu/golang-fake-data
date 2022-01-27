@@ -8,7 +8,6 @@ import (
 	"golang-fake-data/helper"
 	"log"
 	"runtime"
-	"sync"
 )
 
 func main() {
@@ -25,17 +24,11 @@ func main() {
 		Client: client,
 	}
 
-	var wg sync.WaitGroup
-	wg.Add(10000000)
 	for i := 0; i < 10000000; i++ {
-		go func(i int) {
-			defer wg.Done()
-			var fakeData = createFakePerson.CreatePerson()
-			err := testDal.Add(&fakeData)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}(i)
+		var fakeData = createFakePerson.CreatePerson()
+		err := testDal.Add(&fakeData)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	wg.Wait()
 }
