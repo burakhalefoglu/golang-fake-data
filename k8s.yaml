@@ -1,29 +1,79 @@
-apiVersion: batch/v1
-kind: Job
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: fake-person-worker
+#   namespace: worker-app-dev
+# spec:
+#   parallelism: 100
+#   template:
+#     metadata:
+#       labels:
+#         app: fake-person-worker
+#     spec:
+#       nodeSelector:
+#         dedicated: spot
+#       restartPolicy: OnFailure
+#       containers:
+#         - name: fake-person-worker
+#           image: CONTAINER_IMAGE
+#           imagePullPolicy: Always
+#           resources:
+#             requests:
+#               memory: "100M"
+#               cpu: "0.1"
+#             limits:
+#               memory: "250M"
+#               cpu: "0.2"
+#           env:
+#             - name: MONGODB_HOST
+#               valueFrom:
+#                 configMapKeyRef:
+#                   name: worker-app-config
+#                   key: mongo-host
+#             - name: MONGODB_USER
+#               valueFrom:
+#                 configMapKeyRef:
+#                   name: worker-app-config
+#                   key: mongodb-ml-test-db-user
+#             - name: MONGODB_PASS
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: worker-app-secret
+#                   key: mongodb-ml-test-db-pass
+
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: fake-person-worker
+  name: fake-person-worker-dep
   namespace: worker-app-dev
 spec:
-  parallelism: 100
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: fake-person-worker-dep
   template:
     metadata:
       labels:
-        app: fake-person-worker
+        app: fake-person-worker-dep
     spec:
       nodeSelector:
         dedicated: spot
-      restartPolicy: OnFailure
       containers:
-        - name: fake-person-worker
+        - name: fake-person-worker-dep
           image: CONTAINER_IMAGE
           imagePullPolicy: Always
           resources:
             requests:
-              memory: "100M"
-              cpu: "0.1"
+              memory: "50M"
+              cpu: "0.01"
             limits:
-              memory: "250M"
-              cpu: "0.2"
+              memory: "100M"
+              cpu: "0.02"
           env:
             - name: MONGODB_HOST
               valueFrom:
@@ -40,3 +90,6 @@ spec:
                 secretKeyRef:
                   name: worker-app-secret
                   key: mongodb-ml-test-db-pass
+
+
+
