@@ -81,15 +81,12 @@ spec:
                   name: worker-app-config
                   key: mongo-host
             - name: MONGODB_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: worker-app-config
-                  key: mongodb-ml-test-db-user
+              value: root
             - name: MONGODB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: worker-app-secret
-                  key: mongodb-ml-test-db-pass
+                  name: mongodb-secret
+                  key: mongodb-root-password
 
 
 
