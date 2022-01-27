@@ -8,6 +8,7 @@ import (
 	"golang-fake-data/helper"
 	"log"
 	"runtime"
+	"time"
 )
 
 func main() {
@@ -30,5 +31,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		time.Sleep(5 * time.Second)
 	}
 }
