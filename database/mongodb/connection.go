@@ -4,6 +4,7 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"log"
 	"os"
 )
 
@@ -11,13 +12,16 @@ type Connection struct {
 	Conn *mongo.Client
 }
 
-var Conn = Connection{}
-
 func ConnectMongodb() *mongo.Client {
-	var uri = "mongodb://" + os.Getenv("MONGODB_USER") + ":" + os.Getenv("MONGODB_PASS") + "@" + os.Getenv("MONGODB_HOST") + ":" + os.Getenv("MONGODB_PORT") + "/"
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+
+	credential := options.Credential{
+		Username: os.Getenv("MONGODB_USER"),
+		Password: os.Getenv("MONGODB_PASS"),
+	}
+	clientOpts := options.Client().ApplyURI("mongodb://" + os.Getenv("MONGODB_HOST") + ":" + os.Getenv("MONGODB_PORT")).SetAuth(credential)
+	client, err := mongo.Connect(context.TODO(), clientOpts)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	return client
 }
