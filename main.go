@@ -8,7 +8,6 @@ import (
 	"log"
 	"runtime"
 	"time"
-	"log"
 	"github.com/joho/godotenv"
 )
 
