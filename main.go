@@ -32,6 +32,6 @@ func main() {
 		if err != nil {
 			return
 		}
-		time.Sleep(0.1 *time.Second)
+		time.Sleep(100 * time.Millisecond)
 	}
 }
