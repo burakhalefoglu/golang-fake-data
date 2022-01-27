@@ -18,12 +18,12 @@
 #           image: CONTAINER_IMAGE
 #           imagePullPolicy: Always
 #           resources:
-#             requests:
-#               memory: "250M"
-#               cpu: "0.1"
-#             limits:
-#               memory: "500M"
-#               cpu: "0.2"
+#              requests:
+#                memory: "250M"
+#                cpu: "0.05"
+#              limits:
+#                memory: "500M"
+#                cpu: "0.1"
 #           env:
 #             - name: MONGODB_HOST
 #               valueFrom:

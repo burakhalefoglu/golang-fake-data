@@ -14,7 +14,7 @@ type Connection struct {
 var Conn = Connection{}
 
 func ConnectMongodb() *mongo.Client {
-	var uri = "mongodb://" + os.Getenv("MONGODB_USER") + ":" + os.Getenv("MONGODB_PASS") + "@" + os.Getenv("MONGODB_HOST") + ":" + os.Getenv("MONGODB_PORT") + "/?maxPoolSize=20&w=majority"
+	var uri = "mongodb://" + os.Getenv("MONGODB_USER") + ":" + os.Getenv("MONGODB_PASS") + "@" + os.Getenv("MONGODB_HOST") + ":" + os.Getenv("MONGODB_PORT") + "/"
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
 		panic(err)
