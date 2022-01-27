@@ -31,6 +31,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		time.Sleep(5 * time.Second)
+		time.Sleep(100 * time.Millisecond)
 	}
 }

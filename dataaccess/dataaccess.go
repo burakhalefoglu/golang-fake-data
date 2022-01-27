@@ -19,7 +19,6 @@ func (m *MDTestDal) Add(data *fakePersonStruct.Person) error {
 
 	collection := m.Client.Database("AppneuronTestDatabase").Collection("fakePersons")
 	var _, err = collection.InsertOne(ctx, &data)
-
 	if err != nil {
 		return err
 	}
