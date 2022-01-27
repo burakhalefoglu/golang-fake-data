@@ -7,8 +7,8 @@ import (
 	"golang-fake-data/helper"
 	"log"
 	"runtime"
-	"time"
 	"github.com/joho/godotenv"
+	"sync"
 )
 
 func main() {
@@ -25,13 +25,17 @@ func main() {
 		Client: client,
 	}
 
-	for i := 1; i <= 10000000; i++ {
-		var fakeData = createFakePerson.CreatePerson()
-		err := testDal.Add(&fakeData)
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
-		time.Sleep(100 * time.Millisecond)
+	var wg sync.WaitGroup
+	wg.Add(10000000)
+	for i := 0; i < 10000000; i++ {
+		go func(i int) {
+			defer wg.Done()
+				var fakeData = createFakePerson.CreatePerson()
+				err := testDal.Add(&fakeData)
+				if err != nil {
+					log.Fatal(err)
+				}
+		}(i)
 	}
+	wg.Wait()
 }
