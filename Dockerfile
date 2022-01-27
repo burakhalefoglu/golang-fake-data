@@ -8,15 +8,12 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /app/fake-person-worker-service .
-RUN rm -rf /app/createFakePerson
-RUN rm -rf /app/database
-RUN rm -rf /app/fakePersonStruct
+RUN go build -o /app/fake-data-service .
+RUN rm -rf /app/internal
+RUN rm -rf /app/pkg
+RUN rm -rf /app/test
 RUN rm -rf /app/main.go
-RUN rm -rf /app/helper
-RUN rm -rf /app/mongodb
-RUN rm -rf /app/Dockerfile
 RUN rm -rf /app/go.mod
+EXPOSE 8000
 
-
-CMD [ "/app/fake-person-worker-service" ]
+CMD [ "/app/fake-data-service" ]
