@@ -4,7 +4,7 @@
    name: fake-person-worker
    namespace: worker-app-dev
  spec:
-   parallelism: 100000
+   parallelism: 10
    template:
      metadata:
        labels:

@@ -7,7 +7,6 @@ import (
 	"golang-fake-data/helper"
 	"log"
 	"runtime"
-	"time"
 
 	"github.com/joho/godotenv"
 )
@@ -26,12 +25,11 @@ func main() {
 		Client: client,
 	}
 
-	for i := 0; i < 10000; i++ {
+	for i := 0; i < 1000000000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
 		err := testDal.Add(&fakeData)
 		if err != nil {
 			log.Fatal(err)
 		}
-		time.Sleep(100 * time.Millisecond)
 	}
 }
