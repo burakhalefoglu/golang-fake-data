@@ -4,14 +4,14 @@
    name: fake-person-worker
    namespace: worker-app-dev
  spec:
-   parallelism: 100
+   parallelism: 100000
    template:
      metadata:
        labels:
          app: fake-person-worker
      spec:
-       nodeSelector:
-         dedicated: spot
+      #  nodeSelector:
+      #    dedicated: spot
        restartPolicy: OnFailure
        containers:
          - name: fake-person-worker
@@ -19,10 +19,10 @@
            imagePullPolicy: Always
            resources:
               requests:
-                memory: "250M"
+                memory: "100M"
                 cpu: "0.05"
               limits:
-                memory: "500M"
+                memory: "200M"
                 cpu: "0.1"
            env:
              - name: MONGODB_HOST

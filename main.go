@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
 	"golang-fake-data/createFakePerson"
 	"golang-fake-data/dataaccess"
 	"golang-fake-data/database/mongodb"
@@ -9,6 +8,8 @@ import (
 	"log"
 	"runtime"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 		Client: client,
 	}
 
-	for i := 0; i < 10000000; i++ {
+	for i := 0; i < 10000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
 		err := testDal.Add(&fakeData)
 		if err != nil {
