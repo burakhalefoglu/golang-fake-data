@@ -25,7 +25,7 @@ func main() {
 		Client: client,
 	}
 
-	for i := 0; i < 1000000000000; i++ {
+	for i := 0; i < 10000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
 		err := testDal.Add(&fakeData)
 		if err != nil {
