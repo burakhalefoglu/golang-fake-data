@@ -33,4 +33,5 @@ func main() {
 		}
 		log.Println(fakeData.Name + "Added")
 	}
+	log.Println("Finished")
 }
