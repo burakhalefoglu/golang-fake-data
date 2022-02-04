@@ -1,45 +1,44 @@
- apiVersion: batch/v1
- kind: Job
- metadata:
-   name: fake-person-worker
-   namespace: worker-app-dev
- spec:
-   parallelism: 10
-   template:
-     metadata:
-       labels:
-         app: fake-person-worker
-     spec:
-      #  nodeSelector:
-      #    dedicated: spot
-       restartPolicy: OnFailure
-       containers:
-         - name: fake-person-worker
-           image: CONTAINER_IMAGE
-           imagePullPolicy: Always
-           resources:
-              requests:
-                memory: "100M"
-                cpu: "0.05"
-              limits:
-                memory: "200M"
-                cpu: "0.1"
-           env:
-             - name: MONGODB_HOST
-               valueFrom:
-                 configMapKeyRef:
-                   name: worker-app-config
-                   key: mongo-host
-             - name: MONGODB_USER
-               valueFrom:
-                 configMapKeyRef:
-                   name: worker-app-config
-                   key: mongodb-ml-test-db-user
-             - name: MONGODB_PASS
-               valueFrom:
-                 secretKeyRef:
-                   name: worker-app-secret
-                   key: mongodb-ml-test-db-pass
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fake-person-worker
+spec:
+  template:
+    spec:
+      parallelism: 100
+      containers:
+        - name: fake-person-worker
+          image: CONTAINER_IMAGE
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "100M"
+              cpu: "0.05"
+            limits:
+              memory: "200M"
+              cpu: "0.1"
+      restartPolicy: Never
+      env:
+        - name: MONGODB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: worker-app-config
+              key: mongo-host
+          - name: MONGODB_USER
+            valueFrom:
+              configMapKeyRef:
+                name: worker-app-config
+                key: mongodb-ml-test-db-user
+          - name: MONGODB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: worker-app-secret
+                key: mongodb-ml-test-db-pass
+
+
+
+
+
 
 
 

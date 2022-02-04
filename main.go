@@ -29,7 +29,8 @@ func main() {
 		var fakeData = createFakePerson.CreatePerson()
 		err := testDal.Add(&fakeData)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalln(err)
 		}
+		log.Println(fakeData.Name + "Added")
 	}
 }
