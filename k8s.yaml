@@ -3,9 +3,9 @@ kind: Job
 metadata:
   name: fake-person-worker
 spec:
+  parallelism: 100
   template:
     spec:
-      parallelism: 100
       restartPolicy: Never
       containers:
         - name: fake-person-worker
