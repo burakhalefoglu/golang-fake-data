@@ -9,7 +9,8 @@ phases:
       - export PATH=$PWD/:$PATH
       - apt-get update
       - apt-get install python
-      - apt-get -y install jq python3-pip pip3 install --upgrade awscli
+      - apt-get -y install jq python3-pip
+      - pip3 install --upgrade awscli
       - docker login -u $DOCKER_USER -p $DOCKER_PASS
   pre_build:
     commands:
