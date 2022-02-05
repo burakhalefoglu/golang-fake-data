@@ -4,7 +4,7 @@ import "github.com/scylladb/gocqlx/v2/table"
 
 // metadata specifies table name and columns it must be in sync with schema.
 var personMetadata = table.Metadata{
-	Name: "Person",
+	Name: "test.persons",
 	Columns: []string{
 		"id",
 		"name",
