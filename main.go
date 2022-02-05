@@ -2,7 +2,7 @@ package main
 
 import (
 	"golang-fake-data/createFakePerson"
-	"golang-fake-data/dataaccess"
+	dataaccess "golang-fake-data/dataaccess/cassandra"
 	"golang-fake-data/helper"
 	"log"
 	"runtime"
@@ -20,12 +20,10 @@ func main() {
 		return
 	}
 
-	testDal := dataaccess.MDTestDal{}
-
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
 		log.Println(fakeData)
-		err := testDal.Add(&fakeData)
+		var err = dataaccess.InsertData(&fakeData)
 		if err != nil {
 			log.Fatalln(err)
 		}

@@ -1,27 +1,28 @@
 package fakePersonStruct
 
 type Person struct {
-	Name                                                        string 
-	Gender                                                      string  
-	Address                                                     string  
-	Country                                                     string  
-	City                                                        string  
-	Continent                                                   string  
-	Region                                                      string  
-	Age                                                         int64   
-	Married                                                     bool   
-	Phone                                                       string  
-	CreditCardNumber                                            string  
-	CreditCardExpirationDateString                              string  
-	CreditCardType                                              string  
-	TotalSpendingGold                                           float64 
+	Id                                                          string
+	Name                                                        string
+	Gender                                                      string
+	Address                                                     string
+	Country                                                     string
+	City                                                        string
+	Continent                                                   string
+	Region                                                      string
+	Age                                                         int64
+	Married                                                     bool
+	Phone                                                       string
+	CreditCardNumber                                            string
+	CreditCardExpirationDateString                              string
+	CreditCardType                                              string
+	TotalSpendingGold                                           float64
 	TotalSessionDuration                                        float64
-	StartingDate                                                int64   
-	CurrentDate                                                 int64   
-	StartingMonth                                               int64   
-	CurrentMonth                                                int64   
-	TotalClickEvent                                             int64   
-	TotalSessionCount                                           int64   
+	StartingDate                                                int64
+	CurrentDate                                                 int64
+	StartingMonth                                               int64
+	CurrentMonth                                                int64
+	TotalClickEvent                                             int64
+	TotalSessionCount                                           int64
 	TotalScore                                                  float64
 	TotalGold                                                   int64
 	TotalSkillCount                                             int64
