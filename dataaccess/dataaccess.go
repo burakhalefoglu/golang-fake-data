@@ -1,26 +1,27 @@
 package dataaccess
 
 import (
-	"context"
+	"golang-fake-data/database/mongodb"
 	"golang-fake-data/fakePersonStruct"
-	"time"
-
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type MDTestDal struct {
-	Client *mongo.Client
 }
 
 func (m *MDTestDal) Add(data *fakePersonStruct.Person) error {
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
-	collection := m.Client.Database("AppneuronTestDatabase").Collection("fakePersons")
-	var _, err = collection.InsertOne(ctx, &data)
+	client, ctx, cancel, err := mongodb.Connect()
 	if err != nil {
-		return err
+		panic(err)
+	}
+
+	defer mongodb.Close(client, ctx, cancel)
+	mongodb.Ping(client, ctx)
+
+	collection := client.Database("AppneuronTestDatabase").Collection("fakePersons")
+	var _, errResult = collection.InsertOne(ctx, &data)
+	if errResult != nil {
+		return errResult
 	}
 	return nil
 }

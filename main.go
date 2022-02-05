@@ -3,7 +3,6 @@ package main
 import (
 	"golang-fake-data/createFakePerson"
 	"golang-fake-data/dataaccess"
-	"golang-fake-data/database/mongodb"
 	"golang-fake-data/helper"
 	"log"
 	"runtime"
@@ -20,12 +19,8 @@ func main() {
 		log.Fatal("Error loading .env file")
 		return
 	}
-	var client = mongodb.ConnectMongodb()
-	testDal := dataaccess.MDTestDal{
-		Client: client,
-	}
 
-	log.Println("mongodb started: ", client.NumberSessionsInProgress())
+	testDal := dataaccess.MDTestDal{}
 
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
