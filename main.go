@@ -29,6 +29,7 @@ func main() {
 
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
+		log.Println(fakeData)
 		err := testDal.Add(&fakeData)
 		if err != nil {
 			log.Fatalln(err)
