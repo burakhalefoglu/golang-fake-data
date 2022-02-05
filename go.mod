@@ -6,6 +6,7 @@ require (
 	github.com/gocql/gocql v0.0.0-20211222173705-d73e6b1002a7
 	github.com/jaswdr/faker v1.10.0
 	github.com/joho/godotenv v1.4.0
+	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 	github.com/scylladb/gocqlx/v2 v2.6.0
 	github.com/thanhpk/randstr v1.0.4
 	go.mongodb.org/mongo-driver v1.8.2
