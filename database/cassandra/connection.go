@@ -24,7 +24,7 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 	}
 
 	err = session.ExecStmt(`CREATE TABLE IF NOT EXISTS test.persons (
-		id uuid PRIMARY KEY,
+		id text PRIMARY KEY,
 		name text,
 		gender text,
 		address text,
