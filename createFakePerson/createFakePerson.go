@@ -2,7 +2,6 @@ package createFakePerson
 
 import (
 	faker "github.com/jaswdr/faker"
-	"github.com/thanhpk/randstr"
 	"golang-fake-data/fakePersonStruct"
 )
 
@@ -10,7 +9,7 @@ var f = faker.New()
 var p = fakePersonStruct.Person{}
 
 func CreatePerson() fakePersonStruct.Person {
-	p.Id = randstr.Hex(16)
+	//p.Id = randstr.Hex(16)
 	p.Name = f.Person().Name()
 	p.Gender = f.Person().Gender()
 	p.Address = f.Address().Address()
