@@ -7,7 +7,7 @@ metadata:
   labels:
     app: fake-person-worker
 spec:
-  replicas: 100
+  replicas: 99
   selector:
     matchLabels:
       app: nginx
