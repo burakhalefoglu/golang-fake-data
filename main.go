@@ -25,7 +25,6 @@ func main() {
 	max := 30
 	var dur = rand.Intn(max-min) + min
 	time.Sleep(time.Duration(dur) * time.Second)
-
 	session, err1 := connection.ConnectDatabase()
 	if err1 != nil {
 		log.Fatalln("connection err: ", err1)
