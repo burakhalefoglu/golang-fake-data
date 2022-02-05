@@ -16,6 +16,7 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 	cluster.Keyspace = "AppneuronTestDatabase"
 	cluster.Consistency = gocql.Quorum
 	session, err := gocqlx.WrapSession(cluster.CreateSession())
+
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
