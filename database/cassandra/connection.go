@@ -47,7 +47,7 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 		"total_click_event bigint",
 		"total_session_count bigint",
 		"total_score double",
-		"total_gold bigint",)`)
+		"total_gold bigint")`)
 	if err != nil {
 		log.Fatal("create table: ", err)
 	}
