@@ -20,7 +20,8 @@ func ConnectMongodb() *mongo.Client {
 		Password: os.Getenv("MONGODB_PASS"),
 	}
 	clientOpts := options.Client().ApplyURI("mongodb://" + os.Getenv("MONGODB_HOST") + ":" + os.Getenv("MONGODB_PORT")).SetAuth(credential)
-	client, err := mongo.Connect(context.TODO(), clientOpts)
+	ctx := context.Background()
+	client, err := mongo.Connect(ctx, clientOpts)
 	if err != nil {
 		log.Fatal(err)
 	}

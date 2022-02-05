@@ -25,13 +25,15 @@ func main() {
 		Client: client,
 	}
 
+	log.Println("mongodb started: ", client.NumberSessionsInProgress())
+
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
 		err := testDal.Add(&fakeData)
 		if err != nil {
 			log.Fatalln(err)
 		}
-		log.Println(fakeData.Name + "Added")
+		log.Println(fakeData.Name + " Added")
 	}
 	log.Println("Finished")
 }
