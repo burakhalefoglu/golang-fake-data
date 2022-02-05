@@ -7,7 +7,6 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 type Connection struct {
@@ -25,9 +24,5 @@ func ConnectMongodb() *mongo.Client {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := client.Ping(context.TODO(), readpref.Primary()); err != nil {
-		panic(err)
-	}
-	log.Println("Successfully connected and pinged.")
 	return client
 }

@@ -14,13 +14,11 @@ type MDTestDal struct {
 
 func (m *MDTestDal) Add(data *fakePersonStruct.Person) error {
 
-	collection := m.Client.Database("AppneuronTestDatabase").Collection("fakePersons")
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
+	collection := m.Client.Database("AppneuronTestDatabase").Collection("fakePersons")
 	var _, err = collection.InsertOne(ctx, &data)
-
 	if err != nil {
 		return err
 	}
