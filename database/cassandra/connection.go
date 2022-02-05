@@ -13,7 +13,6 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 		Username: "cassandra",
 		Password: "test*12",
 	}
-	cluster.Keyspace = "system"
 	cluster.Consistency = gocql.Quorum
 	session, err := gocqlx.WrapSession(cluster.CreateSession())
 
