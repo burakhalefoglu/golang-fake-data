@@ -25,7 +25,7 @@ var personMetadata = table.Metadata{
 		"starting_date",
 		"current_date",
 		"starting_month",
-		"CurrentMonth",
+		"current_month",
 		"total_click_event",
 		"total_session_count",
 		"total_score",
