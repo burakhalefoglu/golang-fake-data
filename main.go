@@ -1,14 +1,15 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"golang-fake-data/createFakePerson"
 	dataaccess "golang-fake-data/dataaccess/cassandra"
 	connection "golang-fake-data/database/cassandra"
 	"golang-fake-data/helper"
 	"log"
+	"math/rand"
 	"runtime"
-
-	"github.com/joho/godotenv"
+	"time"
 )
 
 func main() {
@@ -20,9 +21,12 @@ func main() {
 		log.Fatal("Error loading .env file")
 		return
 	}
-	session, err := connection.ConnectDatabase()
-	if err != nil {
-		log.Fatalln("create keyspace err: ", err)
+	var dur = rand.Intn(30)
+	time.Sleep(time.Duration(dur) * time.Second)
+
+	session, err1 := connection.ConnectDatabase()
+	if err1 != nil {
+		log.Fatalln("connection err: ", err1)
 		return
 	}
 
@@ -33,7 +37,7 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		log.Println(fakeData.Name + " Added")
+		log.Println(fakeData.Name + " added-fake-data")
 	}
 	log.Println("Finished")
 }
