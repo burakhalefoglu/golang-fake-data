@@ -137,7 +137,7 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 		friday_session_count bigint,
 		saturday_session_count bigint,
 		am_session_count bigint,
-		am_session_count bigint,
+		pm_session_count bigint,
 		session_zero_to_five_hour_count bigint,
 		session_six_to_eleven_hour_count bigint,
 		session_twelve_to_seventeen_hour_count bigint,

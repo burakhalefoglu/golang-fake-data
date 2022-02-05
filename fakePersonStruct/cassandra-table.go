@@ -119,7 +119,7 @@ var personMetadata = table.Metadata{
 		"friday_session_count",
 		"saturday_session_count",
 		"am_session_count",
-		"am_session_count",
+		"pm_session_count",
 		"session_zero_to_five_hour_count",
 		"session_six_to_eleven_hour_count",
 		"session_twelve_to_seventeen_hour_count",
