@@ -7,6 +7,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 type Connection struct {
@@ -20,10 +21,13 @@ func ConnectMongodb() *mongo.Client {
 		Password: os.Getenv("MONGODB_PASS"),
 	}
 	clientOpts := options.Client().ApplyURI("mongodb://" + os.Getenv("MONGODB_HOST") + ":" + os.Getenv("MONGODB_PORT")).SetAuth(credential)
-	ctx := context.Background()
-	client, err := mongo.Connect(ctx, clientOpts)
+	client, err := mongo.Connect(context.TODO(), clientOpts)
 	if err != nil {
 		log.Fatal(err)
 	}
+	if err := client.Ping(context.TODO(), readpref.Primary()); err != nil {
+		panic(err)
+	}
+	log.Println("Successfully connected and pinged.")
 	return client
 }
