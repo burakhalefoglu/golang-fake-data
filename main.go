@@ -21,7 +21,9 @@ func main() {
 		log.Fatal("Error loading .env file")
 		return
 	}
-	var dur = rand.Intn(30)
+	min := 10
+	max := 30
+	var dur = rand.Intn(max-min) + min
 	time.Sleep(time.Duration(dur) * time.Second)
 
 	session, err1 := connection.ConnectDatabase()
