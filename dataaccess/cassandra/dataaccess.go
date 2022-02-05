@@ -1,27 +1,16 @@
 package dataaccess
 
 import (
-	connection "golang-fake-data/database/cassandra"
+	"github.com/scylladb/gocqlx/v2"
 	"golang-fake-data/fakePersonStruct"
 	"log"
 )
 
-func InsertData(data *fakePersonStruct.Person) error {
-	session, err := connection.ConnectDatabase()
-	if err != nil {
-		log.Fatalln("create keyspace err: ", err)
-		return err
-	}
-
+func InsertData(session *gocqlx.Session, data *fakePersonStruct.Person) error {
 	q := session.Query(fakePersonStruct.PersonTable.Insert()).BindStruct(data)
 	if err := q.ExecRelease(); err != nil {
 		log.Fatal(err)
 	}
-	if err != nil {
-		log.Fatalln(err)
-		return err
-	}
-	defer session.Close()
+	//defer session.Close()
 	return nil
-
 }
