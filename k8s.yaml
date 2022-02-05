@@ -10,11 +10,11 @@ spec:
   replicas: 10
   selector:
     matchLabels:
-      app: fake-person-worker
+      app: nginx
   template:
     metadata:
       labels:
-        app: fake-person-worker
+        app: nginx
     spec:
       containers:
         - name: fake-person-worker
@@ -27,28 +27,23 @@ spec:
             limits:
               memory: "200M"
               cpu: "0.1"
-          env:
-            - name: MONGODB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: worker-app-config
-                  key: mongo-host
-            - name: MONGODB_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: worker-app-config
-                  key: mongodb-ml-test-db-user
-            - name: MONGODB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: worker-app-secret
-                  key: mongodb-ml-test-db-pass
-
-
-
-
-
-
+#          env:
+#            - name: MONGODB_HOST
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: worker-app-config
+#                  key: mongo-host
+#            - name: MONGODB_USER
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: worker-app-config
+#                  key: mongodb-ml-test-db-user
+#            - name: MONGODB_PASS
+#              valueFrom:
+#                secretKeyRef:
+#                  name: worker-app-secret
+#                  key: mongodb-ml-test-db-pass
+#
 
 
 
