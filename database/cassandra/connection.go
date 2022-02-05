@@ -23,7 +23,7 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 		log.Fatal("create keyspace:", err)
 	}
 
-	err = session.ExecStmt(`CREATE TABLE IF NOT EXISTS AppneuronTestDatabase.persons (
+	err = session.ExecStmt(`CREATE TABLE IF NOT EXISTS AppneuronTestDatabase.fakePersons (
 		id text PRIMARY KEY,
 		name text,
 		gender text,
