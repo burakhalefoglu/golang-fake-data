@@ -7,9 +7,7 @@ import (
 	connection "golang-fake-data/database/cassandra"
 	"golang-fake-data/helper"
 	"log"
-	"math/rand"
 	"runtime"
-	"time"
 )
 
 func main() {
@@ -21,10 +19,6 @@ func main() {
 		log.Fatal("Error loading .env file")
 		return
 	}
-	min := 10
-	max := 30
-	var dur = rand.Intn(max-min) + min
-	time.Sleep(time.Duration(dur) * time.Second)
 	session, err1 := connection.ConnectDatabase()
 	if err1 != nil {
 		log.Fatalln("connection err: ", err1)
