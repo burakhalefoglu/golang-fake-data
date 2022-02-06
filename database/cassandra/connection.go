@@ -10,7 +10,8 @@ import (
 func ConnectDatabase() (*gocqlx.Session, error) {
 
 	cluster := gocql.NewCluster("k8ssandra-cassandra.k8ssandra.svc.cluster.local")
-	cluster.ConnectTimeout = time.Second * 20
+	cluster.ConnectTimeout = time.Second * 30
+	//cluster.DisableInitialHostLookup = true
 	cluster.Authenticator = gocql.PasswordAuthenticator{
 		Username: "cassandra",
 		Password: "test*12",
