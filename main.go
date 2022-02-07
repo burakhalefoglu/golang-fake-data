@@ -21,7 +21,6 @@ func main() {
 	session, err := connection.ConnectDatabase()
 	if err != nil {
 		log.Fatalln("connection err: ", err)
-		main()
 	}
 
 	for i := 0; i < 100000000; i++ {

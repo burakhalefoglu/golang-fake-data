@@ -8,6 +8,7 @@ metadata:
   namespace: test-app
 spec:
   replicas: 10
+  schedulerName: volcano
   selector:
     matchLabels:
       app: golang-fake-data
