@@ -5,26 +5,27 @@ import (
 	"github.com/scylladb/gocqlx/v2"
 	"log"
 	"os"
+	"time"
 )
 
 func ConnectDatabase() (*gocqlx.Session, error) {
 
 	cluster := gocql.NewCluster(os.Getenv("CASSANDRA_HOST"))
 	cluster.ProtoVersion = 4
-	//cluster.ConnectTimeout = time.Second * 30
-	//cluster.Timeout = time.Second * 30
-	cluster.NumConns = 1000
-	//cluster.ReconnectInterval = time.Second * 30
-	//cluster.SocketKeepalive = 0
-	//cluster.DisableInitialHostLookup = true
-	//cluster.IgnorePeerAddr = true
-	//cluster.Events.DisableNodeStatusEvents = true
-	//cluster.Events.DisableTopologyEvents = true
-	//cluster.Events.DisableSchemaEvents = true
-	//cluster.MaxRoutingKeyInfo = 50000
-	//cluster.PageSize = 50000
-	//cluster.WriteCoalesceWaitTime = time.Second * 30
-	//cluster.ReconnectionPolicy = &gocql.ConstantReconnectionPolicy{MaxRetries: 5000, Interval: 5 * time.Second}
+	cluster.ConnectTimeout = time.Second * 30
+	cluster.Timeout = time.Second * 30
+	//cluster.NumConns = 1000
+	cluster.ReconnectInterval = time.Second * 30
+	cluster.SocketKeepalive = 0
+	cluster.DisableInitialHostLookup = true
+	cluster.IgnorePeerAddr = true
+	cluster.Events.DisableNodeStatusEvents = true
+	cluster.Events.DisableTopologyEvents = true
+	cluster.Events.DisableSchemaEvents = true
+	cluster.MaxRoutingKeyInfo = 50000
+	cluster.PageSize = 50000
+	cluster.WriteCoalesceWaitTime = time.Second * 30
+	cluster.ReconnectionPolicy = &gocql.ConstantReconnectionPolicy{MaxRetries: 5000, Interval: 5 * time.Second}
 	cluster.Authenticator = gocql.PasswordAuthenticator{
 		Username: os.Getenv("CASSANDRA_USER"),
 		Password: os.Getenv("CASSANDRA_PASS"),
