@@ -7,7 +7,7 @@ metadata:
     app: golang-fake-data
   namespace: test-app
 spec:
-  replicas: 10
+  replicas: 100
   selector:
     matchLabels:
       app: golang-fake-data
