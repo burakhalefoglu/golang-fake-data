@@ -13,10 +13,10 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 
 	cluster := gocql.NewCluster(os.Getenv("CASSANDRA_HOST"))
 	cluster.ConnectTimeout = time.Second * 30
-	//cluster.Timeout = time.Second * 30
-	//cluster.NumConns = 1000
-	//cluster.ReconnectInterval = time.Second * 30
-	//cluster.SocketKeepalive = 0
+	cluster.Timeout = time.Second * 30
+	cluster.NumConns = 1000
+	cluster.ReconnectInterval = time.Second * 30
+	cluster.SocketKeepalive = 0
 	//cluster.DisableInitialHostLookup = true
 	//cluster.IgnorePeerAddr = true
 	//cluster.Events.DisableNodeStatusEvents = true
