@@ -1,20 +1,22 @@
 package connection
 
 import (
+	"log"
+	"os"
+	"time"
+
 	"github.com/gocql/gocql"
 	"github.com/scylladb/gocqlx/v2"
-	"log"
-	"time"
 )
 
 func ConnectDatabase() (*gocqlx.Session, error) {
 
-	cluster := gocql.NewCluster("k8ssandra-cassandra.k8ssandra.svc.cluster.local")
+	cluster := gocql.NewCluster(os.Getenv("CASSANDRA_HOST"))
 	cluster.ConnectTimeout = time.Second * 30
 	//cluster.DisableInitialHostLookup = true
 	cluster.Authenticator = gocql.PasswordAuthenticator{
-		Username: "cassandra",
-		Password: "test*12",
+		Username: os.Getenv("CASSANDRA_USER"),
+		Password: os.Getenv("CASSANDRA_PASS"),
 	}
 	session, err := gocqlx.WrapSession(cluster.CreateSession())
 

@@ -2,22 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fake-person-worker
-  namespace: worker-app-dev
+  name: golang-fake-data-deployment
   labels:
-    app: fake-person-worker
+    app: golang-fake-data
+  namespace: test-app
 spec:
-  replicas: 30
+  replicas: 10
   selector:
     matchLabels:
-      app: nginx
+      app: golang-fake-data
   template:
     metadata:
       labels:
-        app: nginx
+        app: golang-fake-data
     spec:
+      nodeSelector:
+        dedicated: spot
       containers:
-        - name: fake-person-worker
+        - name: golang-fake-data
           image: CONTAINER_IMAGE
           imagePullPolicy: Always
           resources:
@@ -27,25 +29,23 @@ spec:
             limits:
               memory: "200M"
               cpu: "0.1"
-#          env:
-#            - name: MONGODB_HOST
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: worker-app-config
-#                  key: mongo-host
-#            - name: MONGODB_USER
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: worker-app-config
-#                  key: mongodb-ml-test-db-user
-#            - name: MONGODB_PASS
-#              valueFrom:
-#                secretKeyRef:
-#                  name: worker-app-secret
-#                  key: mongodb-ml-test-db-pass
-#
-
-
+          env:
+            - name: CASSANDRA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: test-app-config
+                  key: cassandra-host
+            - name: CASSANDRA_USER
+              valueFrom:
+                secretKeyRef:
+                  name: prod-k8ssandra-superuser
+                  key: username
+            - name: CASSANDRA_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: prod-k8ssandra-superuser
+                  key: password
+---
 
 
 

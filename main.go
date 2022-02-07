@@ -14,15 +14,14 @@ func main() {
 	defer helper.DeleteHealthFile()
 	helper.CreateHealthFile()
 	runtime.MemProfileRate = 0
-	err := godotenv.Load()
-	if err != nil {
+	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 		return
 	}
-	session, err1 := connection.ConnectDatabase()
-	if err1 != nil {
-		log.Fatalln("connection err: ", err1)
-		return
+	session, err := connection.ConnectDatabase()
+	if err != nil {
+		log.Fatalln("connection err: ", err)
+		main()
 	}
 
 	for i := 0; i < 100000000; i++ {
