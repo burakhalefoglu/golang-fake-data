@@ -5,11 +5,9 @@ import (
 	"github.com/appneuroncompany/light-logger/clogger"
 	"github.com/joho/godotenv"
 	"golang-fake-data/createFakePerson"
-	dataaccess "golang-fake-data/dataaccess/cassandra"
-	connection "golang-fake-data/database/cassandra"
 	"golang-fake-data/helper"
-	"runtime"
 	"golang-fake-data/kafka"
+	"runtime"
 )
 
 func main() {
@@ -31,17 +29,14 @@ func main() {
 	// 	})
 	//}
 
-	
-
-	
-
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
 		var fakeDataByte = kafka.ConvertStructToByteArray(fakeData)
-	    if err := kafka.ProduceMesaage(fakeDataByte); err != nil {
+		if err := kafka.ProduceMessage("fake-data", fakeDataByte); err != nil {
 			clogger.Error(&logger.Messages{
-			"produce error: ": fakeData,
-		})}
+				"produce error: ": fakeData,
+			})
+		}
 		clogger.Info(&logger.Messages{
 			"produce worked : ": "successed",
 		})

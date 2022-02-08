@@ -5,15 +5,16 @@ import (
 	"context"
 	"encoding/json"
 	"net"
+	"os"
 	"strconv"
 
 	kafka "github.com/segmentio/kafka-go"
 )
 
-func newKafkaWriter() *kafka.Writer {
+func newKafkaWriter(topic string) *kafka.Writer {
 	return &kafka.Writer{
-		Addr:     kafka.TCP("64.227.7.141:9092"),
-		Topic:    "my-topic",
+		Addr:     kafka.TCP(os.Getenv("KAFKA_HOST") + ":" + os.Getenv("KAFKA_PORT")),
+		Topic:    topic,
 		Balancer: &kafka.LeastBytes{},
 	}
 }
@@ -21,7 +22,7 @@ func newKafkaWriter() *kafka.Writer {
 func CreateTopic() {
 	topic := "my-topic"
 
-	conn, err := kafka.Dial("tcp", "64.227.7.141:9092")
+	conn, err := kafka.Dial("tcp", os.Getenv("KAFKA_HOST")+":"+os.Getenv("KAFKA_PORT"))
 	if err != nil {
 		panic(err.Error())
 	}
@@ -54,16 +55,17 @@ func CreateTopic() {
 
 func ConvertStructToByteArray(v interface{}) []byte {
 	reqBodyBytes := new(bytes.Buffer)
-	json.NewEncoder(reqBodyBytes).Encode(v)
+	err := json.NewEncoder(reqBodyBytes).Encode(v)
+	if err != nil {
+		return nil
+	}
 	return reqBodyBytes.Bytes()
 }
 
-
-func ProduceMesaage(ByteMessage []byte) error{
-	writer := newKafkaWriter()
+func ProduceMessage(topic string, ByteMessage []byte) error {
+	writer := newKafkaWriter(topic)
 	defer writer.Close()
-	
-	
+
 	msg := kafka.Message{
 		Value: []byte(ByteMessage),
 	}
@@ -72,6 +74,5 @@ func ProduceMesaage(ByteMessage []byte) error{
 		return err
 	}
 	return nil
-		
-}
 
+}
