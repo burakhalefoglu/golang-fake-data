@@ -9,6 +9,7 @@ import (
 	connection "golang-fake-data/database/cassandra"
 	"golang-fake-data/helper"
 	"runtime"
+	"golang-fake-data/kafka"
 )
 
 func main() {
@@ -23,24 +24,36 @@ func main() {
 		})
 		return
 	}
-	session, err := connection.ConnectDatabase()
-	if err != nil {
-		clogger.Error(&logger.Messages{
-			"connection err: ": err.Error(),
-		})
-	}
+	// session, err := connection.ConnectDatabase()
+	// if err != nil {
+	// 	clogger.Error(&logger.Messages{
+	// 		"connection err: ": err.Error(),
+	// 	})
+	//}
+
+	
+
+	
 
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
-		var err = dataaccess.InsertData(session, &fakeData)
-		if err != nil {
+		var fakeDataByte = kafka.ConvertStructToByteArray(fakeData)
+	    if err := kafka.ProduceMesaage(fakeDataByte); err != nil {
 			clogger.Error(&logger.Messages{
-				"insert err: ": err.Error(),
-			})
-		}
+			"produce error: ": fakeData,
+		})}
 		clogger.Info(&logger.Messages{
-			"person added: ": fakeData,
+			"produce worked : ": "successed",
 		})
+		//var err = dataaccess.InsertData(session, &fakeData)
+		// if err != nil {
+		// 	clogger.Error(&logger.Messages{
+		// 		"insert err: ": err.Error(),
+		// 	})
+		// }
+		// clogger.Info(&logger.Messages{
+		// 	"person added: ": fakeData,
+		// })
 	}
 	clogger.Info(&logger.Messages{
 		"messages: ": "finished all work",

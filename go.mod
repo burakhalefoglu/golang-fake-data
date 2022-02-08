@@ -12,6 +12,8 @@ require (
 	go.mongodb.org/mongo-driver v1.8.3
 )
 
+require github.com/pierrec/lz4 v2.6.0+incompatible // indirect
+
 require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.3 // indirect
@@ -19,6 +21,7 @@ require (
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/scylladb/go-reflectx v1.0.1 // indirect
+	github.com/segmentio/kafka-go v0.4.27
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.0.2 // indirect
 	github.com/xdg-go/stringprep v1.0.2 // indirect
