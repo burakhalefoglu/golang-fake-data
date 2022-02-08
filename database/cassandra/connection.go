@@ -1,9 +1,10 @@
 package connection
 
 import (
+	logger "github.com/appneuroncompany/light-logger"
+	"github.com/appneuroncompany/light-logger/clogger"
 	"github.com/gocql/gocql"
 	"github.com/scylladb/gocqlx/v2"
-	"log"
 	"os"
 	"time"
 )
@@ -22,8 +23,6 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 	cluster.Events.DisableNodeStatusEvents = true
 	cluster.Events.DisableTopologyEvents = true
 	cluster.Events.DisableSchemaEvents = true
-	//cluster.MaxRoutingKeyInfo = 50000
-	//cluster.PageSize = 50000
 	cluster.WriteCoalesceWaitTime = 0
 	cluster.ReconnectionPolicy = &gocql.ConstantReconnectionPolicy{MaxRetries: 5000, Interval: 5 * time.Second}
 	cluster.Authenticator = gocql.PasswordAuthenticator{
@@ -32,11 +31,15 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 	}
 	session, err := gocqlx.WrapSession(cluster.CreateSession())
 	if err != nil {
-		log.Fatal(err)
+		clogger.Error(&logger.Messages{
+			"connection err: ": err.Error(),
+		})
 		return nil, err
 	}
 	if err := session.ExecStmt(`CREATE KEYSPACE IF NOT EXISTS AppneuronTestDatabase WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1}`); err != nil {
-		log.Fatal("create keyspace:", err)
+		clogger.Error(&logger.Messages{
+			"create keyspace err: ": err.Error(),
+		})
 	}
 
 	err = session.ExecStmt(`CREATE TABLE IF NOT EXISTS AppneuronTestDatabase.fakePersons (
@@ -159,7 +162,9 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 		session_twelve_to_seventeen_hour_count bigint,
 		session_eighteen_to_twenty_three_hour_count bigint)`)
 	if err != nil {
-		log.Fatal("create table: ", err)
+		clogger.Error(&logger.Messages{
+			"create table err: ": err.Error(),
+		})
 	}
 
 	return &session, err

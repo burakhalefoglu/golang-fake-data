@@ -3,17 +3,18 @@ module golang-fake-data
 go 1.17
 
 require (
+	github.com/appneuroncompany/light-logger v0.0.0-20220208144228-d1d9397bca83
 	github.com/gocql/gocql v0.0.0-20211222173705-d73e6b1002a7
 	github.com/google/uuid v1.3.0
-	github.com/jaswdr/faker v1.10.0
+	github.com/jaswdr/faker v1.10.2
 	github.com/joho/godotenv v1.4.0
 	github.com/scylladb/gocqlx/v2 v2.6.0
-	go.mongodb.org/mongo-driver v1.8.2
+	go.mongodb.org/mongo-driver v1.8.3
 )
 
 require (
 	github.com/go-stack/stack v1.8.0 // indirect
-	github.com/golang/snappy v0.0.4 // indirect
+	github.com/golang/snappy v0.0.3 // indirect
 	github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect

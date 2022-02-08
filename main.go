@@ -1,36 +1,48 @@
 package main
 
 import (
+	"github.com/appneuroncompany/light-logger"
+	"github.com/appneuroncompany/light-logger/clogger"
 	"github.com/joho/godotenv"
 	"golang-fake-data/createFakePerson"
 	dataaccess "golang-fake-data/dataaccess/cassandra"
 	connection "golang-fake-data/database/cassandra"
 	"golang-fake-data/helper"
-	"log"
 	"runtime"
 )
 
 func main() {
 	defer helper.DeleteHealthFile()
 	helper.CreateHealthFile()
+	logger.Log.App = "golang-fake-data"
+
 	runtime.MemProfileRate = 0
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
+		clogger.Error(&logger.Messages{
+			"message": "Error loading .env file",
+		})
 		return
 	}
 	session, err := connection.ConnectDatabase()
 	if err != nil {
-		log.Fatalln("connection err: ", err)
+		clogger.Error(&logger.Messages{
+			"connection err: ": err.Error(),
+		})
 	}
 
 	for i := 0; i < 100000000; i++ {
 		var fakeData = createFakePerson.CreatePerson()
-		log.Println(fakeData)
 		var err = dataaccess.InsertData(session, &fakeData)
 		if err != nil {
-			log.Fatalln(err)
+			clogger.Error(&logger.Messages{
+				"insert err: ": err.Error(),
+			})
 		}
-		log.Println(fakeData.Name + " added-fake-data")
+		clogger.Info(&logger.Messages{
+			"person added: ": fakeData,
+		})
 	}
-	log.Println("Finished")
+	clogger.Info(&logger.Messages{
+		"messages: ": "finished all work",
+	})
 }
