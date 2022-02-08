@@ -7,7 +7,7 @@ metadata:
     app: golang-fake-data
   namespace: test-app
 spec:
-  replicas: 400
+  replicas: 1
   selector:
     matchLabels:
       app: golang-fake-data
@@ -31,21 +31,11 @@ spec:
               memory: "200M"
               cpu: "0.1"
           env:
-            - name: CASSANDRA_HOST
+            - name: KAFKA_HOST
               valueFrom:
                 configMapKeyRef:
                   name: test-app-config
-                  key: cassandra-host
-            - name: CASSANDRA_USER
-              valueFrom:
-                secretKeyRef:
-                  name: prod-k8ssandra-superuser
-                  key: username
-            - name: CASSANDRA_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: prod-k8ssandra-superuser
-                  key: password
+                  key: kafka-host
 ---
 
 
