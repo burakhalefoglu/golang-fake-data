@@ -1,12 +1,13 @@
 package connection
 
 import (
+	"os"
+	"time"
+
 	logger "github.com/appneuroncompany/light-logger"
 	"github.com/appneuroncompany/light-logger/clogger"
 	"github.com/gocql/gocql"
 	"github.com/scylladb/gocqlx/v2"
-	"os"
-	"time"
 )
 
 func ConnectDatabase() (*gocqlx.Session, error) {
@@ -36,7 +37,7 @@ func ConnectDatabase() (*gocqlx.Session, error) {
 		})
 		return nil, err
 	}
-	if err := session.ExecStmt(`CREATE KEYSPACE IF NOT EXISTS AppneuronTestDatabase WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1}`); err != nil {
+	if err := session.ExecStmt(`CREATE KEYSPACE IF NOT EXISTS AppneuronTestDatabase WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3}`); err != nil {
 		clogger.Error(&logger.Messages{
 			"create keyspace err: ": err.Error(),
 		})

@@ -1,8 +1,9 @@
 package dataaccess
 
 import (
-	"github.com/scylladb/gocqlx/v2"
 	"golang-fake-data/fakePersonStruct"
+
+	"github.com/scylladb/gocqlx/v2"
 )
 
 func InsertData(session *gocqlx.Session, data *fakePersonStruct.Person) error {
